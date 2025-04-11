@@ -129,6 +129,7 @@
 </style>
 
   <script>
+  document.addEventListener('DOMContentLoaded', () => {
     const images = document.querySelectorAll('.gallery img');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -141,6 +142,7 @@
     images.forEach(img => {
       observer.observe(img);
     });
+  });
   </script>
 
 </body>
