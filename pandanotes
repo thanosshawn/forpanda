@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Her Handwriting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #fff2f8;
+      font-family: 'Quicksand', sans-serif;
+      color: #3a3a3a;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+
+    header h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: #c94b89;
+      position: relative;
+    }
+
+    .heart {
+      color: #c94b89;
+      font-size: 2.5rem;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    p.intro {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 40px;
+      padding: 0 20px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      padding: 0 20px 80px;
+    }
+
+    .gallery img {
+      width: 90%;
+      max-width: 600px;
+      border-radius: 15px;
+      border: 2px solid #f9b3d1;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .gallery img.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .caption {
+      font-style: italic;
+      color: #666;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="heart">💜</div>
+    <h1>Her Handwriting</h1>
+    <p class="intro">These five notes aren’t just ink. They’re soul. They’re her. And they’re everything to me.</p>
+  </header>
+
+  <div class="gallery">
+    <div>
+      <img src="path/to/image1.jpg" alt="Handwriting 1">
+      <div class="caption">Note 1</div>
+    </div>
+    <div>
+      <img src="path/to/image2.jpg" alt="Handwriting 2">
+      <div class="caption">Note 2</div>
+    </div>
+    <div>
+      <img src="path/to/image3.jpg" alt="Handwriting 3">
+      <div class="caption">Note 3</div>
+    </div>
+    <div>
+      <img src="path/to/image4.jpg" alt="Handwriting 4">
+      <div class="caption">Note 4</div>
+    </div>
+    <div>
+      <img src="path/to/image5.jpg" alt="Handwriting 5">
+      <div class="caption">Note 5</div>
+    </div>
+  </div>
+
+  <script>
+    const images = document.querySelectorAll('.gallery img');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    images.forEach(img => {
+      observer.observe(img);
+    });
+  </script>
+
+</body>
+</html>
