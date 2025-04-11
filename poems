@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panda's Poem from the Womb</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }.container {
+  background: white;
+  padding: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 0 20px rgba(255, 100, 150, 0.5);
+  max-width: 700px;
+  text-align: center;
+  position: relative;
+}
+
+.container h1 {
+  color: #e91e63;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+img.panda {
+  width: 150px;
+  border-radius: 50%;
+  border: 5px solid #fff0f5;
+  margin-bottom: 1rem;
+  animation: bounce 3s infinite;
+}
+
+.poem-images {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.poem-images img {
+  max-width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  transform: rotate(45deg);
+  animation: float 6s infinite ease-in;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+@keyframes float {
+  0% {
+    bottom: -10%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 110%;
+    left: calc(50% + 100px * (random() - 0.5));
+    opacity: 0;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="Panda.png" alt="Baby Panda" class="panda">
+    <h1>From My Mother's Tummy - Handwritten by Panda</h1>
+    <div class="poem-images">
+      <img src="poemimage1.jpg" alt="Handwritten Poem Page 1">
+      <img src="poemimage2.jpg" alt="Handwritten Poem Page 2">
+    </div>
+    <div class="hearts"></div>
+  </div>  <script>
+    // Generate floating hearts
+    const heartsContainer = document.querySelector('.hearts');
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.animationDuration = `${4 + Math.random() * 4}s`;
+      heart.style.opacity = Math.random();
+      heartsContainer.appendChild(heart);
+    }
+  </script></body>
+</html>
