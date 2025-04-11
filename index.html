@@ -56,6 +56,46 @@
       color: #888;
       padding: 20px;
     }
+     .link-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .panda-link {
+    display: block;
+    text-decoration: none;
+    background: #fce4ec;
+    color: #880e4f;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    width: 260px;
+    text-align: center;
+  }
+
+  .panda-link::before {
+    content: '🐼💜';
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    opacity: 0.9;
+  }
+
+  .panda-link:hover {
+    background: #f8bbd0;
+    transform: scale(1.05);
+    color: #4a0033;
+  }
   </style>
 </head>
 <body>
@@ -75,12 +115,22 @@
     <p>Hey Panda,</p>
     <p>I never believed a single person could mean the whole universe to me—until you walked into my life with that shy smile and the most beautiful heart. You’re my comfort in chaos, my calm in the storm, my favorite hello, and my hardest goodbye.</p>
     <p>I’m scared, more than I show. Scared to lose your presence, your laugh, your little silences when words fall short. Scared to not be the reason you smile someday. But most of all, scared of a world where you're not mine.</p>
-    <p>I may not be perfect, but this love—it's as real as the stars we wish under. And I’ll hold onto you like you’re the last bit of magic I ever get.</p>
+    <p>I may not be perfect, but this feeling is as real as the stars we wish under. And I’ll hold onto you like you’re the last bit of magic I ever get.</p>
     <p>Yours, always.<br/>— The one who loves you endlessly</p>
   </div>
 
+  <div class="link-list">
+  <a href="poems.html" class="panda-link">Poems Archive</a>
+  <a href="pandanotes.html" class="panda-link">Panda Notes</a>
+  <a href="#" class="panda-link">More Coming Soon Panda...</a>
+</div>
+
+<style>
+ 
+</style>
+
   <div class="footer">
-    <p>Made with all my heart, for you Panda 🐼</p>
+    <p>Made with all my heart, for you Panda 🐼 by  Keshava💜</p>
   </div>
 
 </body>
