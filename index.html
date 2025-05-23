@@ -5,12 +5,53 @@
   <title>To My Panda</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
   <style>
+    :root { /* Define CSS variables - Dusty Blue and Pearl Theme */
+      --primary-bg-start: #B0C4DE; /* Lighter Dusty Blue */
+      --primary-bg-end: #778899;   /* Darker Slate Gray / Dusty Blue */
+      --text-color: #F0F8FF;       /* AliceBlue - a very light, soft pearl/off-white */
+      --header-text-color: #D4AF37; /* Old Gold - muted and elegant */
+      --link-bg-color: #F5F5F5;     /* WhiteSmoke - a light pearl/cream */
+      --link-text-color: #4682B4;   /* SteelBlue - for contrast on light bg */
+      --link-hover-bg-color: #D4AF37; /* Old Gold for hover */
+      --link-hover-text-color: #F0F8FF; /* AliceBlue for text on gold */
+      --footer-text-color: #B0C4DE;  /* LightSteelBlue - soft dusty blue for footer */
+      --message-bg-color: rgba(240, 248, 255, 0.1); /* Semi-transparent AliceBlue */
+
+      /* New variables for text shadow, derived from header text color */
+      --header-shadow-1: #b09020; /* Darker gold */
+      --header-shadow-2: #907010; /* Even darker gold */
+      --header-shadow-3: #705000; /* Deepest gold */
+    }
+    * { /* Apply border-box globally */
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      background: linear-gradient(to bottom, #2e2b4f, #1e1c38);
+      background: linear-gradient(to bottom, var(--primary-bg-start), var(--primary-bg-end));
       font-family: 'Poppins', sans-serif;
-      color: #fff;
+      color: var(--text-color);
       overflow-x: hidden;
+      background-attachment: fixed; /* Make body background fixed */
+    }
+    .parallax-wrapper { /* New wrapper for parallax effect */
+      background-image: url('image1.jpg'); /* Add parallax background image */
+      /* Consider a more abstract/blurred image for parallax to improve text readability */
+      background-size: cover;
+      background-attachment: scroll; /* Scroll this background with content */
+      /* overflow-y: auto; removed to allow content to scroll the page */
+      /* height: 100vh; removed to allow content to define height */
+      perspective: 1px; /* Add perspective for potential 3D effects later */
+      transform-style: preserve-3d;
+      overflow-x: hidden; /* Keep this to prevent horizontal scrollbars */
+      overflow-y: scroll; /* Ensure this wrapper is scrollable */
+      height: 100vh; /* Full viewport height */
+    }
+    .content-container { /* New container for actual content */
+      /* background: rgba(0,0,0,0.5); Removed to let parallax bg show through */
+      padding-top: 1px; /* Fix margin collapse issues */
+      padding-bottom: 1px; /* Fix margin collapse issues */
+      position: relative; /* Needed for z-indexing if we add more layers */
+      z-index: 1; /* Ensure content is above the parallax-wrapper's direct background */
     }
     .header {
       text-align: center;
@@ -19,7 +60,7 @@
     .header h1 {
       font-family: 'Great Vibes', cursive;
       font-size: 3.5rem;
-      color: #f5b8d1;
+      color: var(--header-text-color);
     }
     .gallery {
       display: flex;
@@ -41,7 +82,7 @@
       max-width: 800px;
       margin: 40px auto;
       padding: 20px;
-      background: rgba(255,255,255,0.05);
+      background: var(--message-bg-color);
       border-radius: 20px;
       text-align: center;
       font-size: 1.2rem;
@@ -53,7 +94,7 @@
     .footer {
       text-align: center;
       font-size: 0.9rem;
-      color: #888;
+      color: var(--footer-text-color);
       padding: 20px;
     }
      .link-list {
@@ -67,8 +108,8 @@
   .panda-link {
     display: block;
     text-decoration: none;
-    background: #fce4ec;
-    color: #880e4f;
+    background: var(--link-bg-color);
+    color: var(--link-text-color);
     padding: 1rem 2rem;
     border-radius: 2rem;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -92,16 +133,71 @@
   }
 
   .panda-link:hover {
-    background: #f8bbd0;
+    background: var(--link-hover-bg-color);
     transform: scale(1.05);
-    color: #4a0033;
+    color: var(--link-hover-text-color);
+  }
+  #particles-js-container-for-styles { /* Renamed for clarity */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0; /* Ensure it's behind the content-container but within parallax-wrapper */
+  }
+  .gallery img {
+    border-radius: 20px;
+    max-width: 300px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    backface-visibility: hidden; /* Improve 3D animation performance/stability */
+  }
+  .gallery img:hover {
+    transform: scale(1.05) rotateY(15deg) rotateX(5deg); /* 3D hover effect */
+  }
+  .header h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    color: var(--header-text-color);
+    text-shadow: 1px 1px 0px var(--header-shadow-1),
+                 2px 2px 0px var(--header-shadow-2),
+                 3px 3px 0px var(--header-shadow-3),
+                 4px 4px 2px rgba(0,0,0,0.2); /* Keep generic shadow for depth */
+    transition: text-shadow 0.3s ease;
+  }
+  .header h1:hover { /* Optional: slightly change shadow on hover */
+    text-shadow: 1px 1px 0px var(--header-shadow-1), /* Keep base, maybe intensify last shadow */
+                 2px 2px 0px var(--header-shadow-2),
+                 3px 3px 0px var(--header-shadow-3),
+                 5px 5px 3px rgba(0,0,0,0.3); /* Slightly deeper generic shadow */
+  }
+
+  /* Accessibility: Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .gallery img:hover {
+      transform: scale(1.02); /* Simpler hover effect */
+    }
+    .header h1:hover {
+        text-shadow: 1px 1px 0px var(--header-shadow-1), /* Keep current text shadow, remove hover change */
+                     2px 2px 0px var(--header-shadow-2),
+                     3px 3px 0px var(--header-shadow-3),
+                     4px 4px 2px rgba(0,0,0,0.2);
+    }
+    /* particles.js animations will be handled by simplifying config below for all,
+       as direct media query control from CSS to JS is complex without restructuring.
+       Ideally, JS would check this media query. */
   }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1>To My Panda, Sara</h1>
+<div class="parallax-wrapper"> <!-- Parallax wrapper starts here -->
+  <div id="particles-js-container-for-styles"></div> <!-- Particles.js container -->
+  <div class="content-container"> <!-- Content container starts here -->
+
+    <div class="header">
+      <h1>To My Panda, Sara</h1>
     <p>“My world glows brighter when you text me 🐼”</p>
   </div>
 
@@ -129,10 +225,106 @@
  
 </style>
 
-  <div class="footer">
     <p>Made with all my heart, for you Panda 🐼 by  Keshava💜</p>
   </div>
 
+  </div> <!-- Content container ends here -->
+</div> <!-- Parallax wrapper ends here -->
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+// particles.js configuration (simplified for better performance, especially on mobile)
+// For a truly adaptive experience, JS would check screen size or prefers-reduced-motion.
+// This is a general simplification.
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+particlesJS("particles-js-container-for-styles", {
+  "particles": {
+    "number": {
+      // Reduce particle count significantly if reduced motion is preferred
+      "value": reducedMotion ? 15 : 35, // Drastically reduced for mobile/reduced motion
+      "density": {
+        "enable": true,
+        "value_area": 800
+      }
+    },
+    "color": {
+      "value": ["#D4AF37", "#F0F8FF", "#B0C4DE", "#778899"]
+    },
+    "shape": {
+      "type": "circle",
+      "stroke": { "width": 0 }
+    },
+    "opacity": {
+      "value": reducedMotion ? 0.3 : 0.4,
+      "random": true,
+      "anim": { // Disable opacity animation if reduced motion is preferred
+        "enable": !reducedMotion,
+        "speed": 0.5,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": reducedMotion ? 2 : 3,
+      "random": true,
+      "anim": { // Disable size animation if reduced motion is preferred
+        "enable": !reducedMotion,
+        "speed": 2,
+        "size_min": 0.5,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      // Disable lines if reduced motion is preferred
+      "enable": !reducedMotion,
+      "distance": 150,
+      "color": "#D4AF37",
+      "opacity": 0.15, // Further reduced opacity
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": reducedMotion ? 0.5 : 0.8, // Slower movement
+      "direction": "none",
+      "random": true,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": { "enable": false }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        // Disable hover events if reduced motion is preferred
+        "enable": !reducedMotion,
+        "mode": "grab"
+      },
+      "onclick": {
+        // Disable click events if reduced motion is preferred
+        "enable": !reducedMotion,
+        "mode": "push"
+      },
+      "resize": true
+    },
+    "modes": {
+      "grab": {
+        "distance": 100, // Reduced grab distance
+        "line_linked": { "opacity": reducedMotion ? 0 : 0.3 } // No line linking on grab if reduced
+      },
+      "bubble": { // Bubble effect might be too much, ensure it's off if not used
+        "distance": 200, "size": 20, "duration": 2, "opacity": 0.3, "speed": 2
+      },
+      "repulse": { "distance": 100, "duration": 0.4 },
+      "push": { "particles_nb": reducedMotion ? 0 : 2 }, // Push fewer/no particles
+      "remove": { "particles_nb": 2 }
+    }
+  },
+  "retina_detect": true
+});
+</script>
 </body>
 </html>
 
